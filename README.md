@@ -10,9 +10,10 @@ For example, you could use Tableau Public to access the Google Sheet and create 
 gem install fpl_gsheet
 
 2. To allow the gem access to a Google sheet, the following steps must be followed.
--- Create a Google service account
--- Store the client_secret.json file in the same location as the script you write that uses this gem
--- Create a google sheet & share it (giving it edit access) with the user created in the first step
+
+* Create a Google service account
+* Store the client_secret.json file in the same location as the script you write that uses this gem
+* Create a google sheet & share it (giving it edit access) with the user created in the first step
 More detailed instructions & a nice animated gif can be [found here](https://www.twilio.com/blog/2017/03/google-spreadsheets-ruby.html).
 
 
@@ -44,7 +45,7 @@ league = FplGsheet::League.new(487590)
 spreadsheet.new_sheet('League')
 spreadsheet.insert_new_row(%w(Rank Team Score))
 
-league.standings.each do |s| 
+league.standings.each do |s|
   spreadsheet.insert_new_row([
     s['rank'],
     s['entry_name'],

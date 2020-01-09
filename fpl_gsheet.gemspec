@@ -26,6 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_dependency "google_drive", "~> 2.1"
-  #spec.add_dependency "google_api_client", "~> 0.4.3" #really?
   spec.add_dependency "recursive-open-struct", "~> 1.1"
 end
