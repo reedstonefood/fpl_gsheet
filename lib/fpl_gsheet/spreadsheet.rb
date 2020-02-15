@@ -10,7 +10,12 @@ module FplGsheet
 
     def initialize(spreadsheet_title)
       # Authenticate a session with your Service Account
-      session = GoogleDrive::Session.from_service_account_key("client_secret.json")
+      if File.file?("client_secret.json")
+        session = GoogleDrive::Session.from_service_account_key("client_secret.json")
+      else
+        credentials = StringIO.new(ENV['GOOGLE_CLIENT_SECRET'])
+        session = GoogleDrive::Session.from_service_account_key(credentials)
+      end
 
       # Get the spreadsheet by its title
       @spreadsheet = session.spreadsheet_by_title(spreadsheet_title)
@@ -18,7 +23,7 @@ module FplGsheet
       @max_row = @worksheet.num_rows
       @rows_to_add = Array.new
     end
-    
+
     def new_sheet(sheet_name)
       doomed_ws = @spreadsheet.worksheet_by_title(sheet_name)
       doomed_ws.delete if !doomed_ws.nil?
@@ -26,22 +31,22 @@ module FplGsheet
       @max_row = 1
       save
     end
-    
+
     def insert_new_row(row_data)
       @rows_to_add << row_data
     end
-    
+
     def insert_new_rows(row_data) # assumes array of arrays
       @rows_to_add += row_data
     end
-    
+
     def save
       @worksheet.insert_rows(@max_row +1, @rows_to_add) if !@rows_to_add.empty?
       @worksheet.save
       @rows_to_add.clear # empty the array
       @max_row = @worksheet.num_rows
     end
-    
+
     def all_rows
       @worksheet.rows
     end
