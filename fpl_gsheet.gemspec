@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_dependency "google_drive", "~> 2.1"
   spec.add_dependency "recursive-open-struct", "~> 1.1"
-  spec.add_dependency "nokogiri", "~> 1.10.8"
+  spec.add_dependency "nokogiri", "~> 1.10.10"
 end
